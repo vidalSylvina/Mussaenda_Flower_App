@@ -285,8 +285,8 @@ if images_uploaded is not None:
             background_color=None,
             background_image=pil_image,  # ✅ pass PIL Image
             update_streamlit=True,
-            height=orig_pil_image.height,
-            width=orig_pil_image.width,
+            height=pil_image.height,
+            width=pil_image.width,
             drawing_mode="point",
             point_display_radius=5,
             key="canvas"
