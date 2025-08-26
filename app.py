@@ -279,11 +279,11 @@ if images_uploaded is not None:
         st.subheader("Click on the Image") 
         # Display drawable canvas (Interactive) 
         canvas_res = st_canvas(
-            fill_color="green",
+            fill_color="rgba(0, 255, 0, 0.3)",
             stroke_width=2,
             stroke_color="black",
             background_color=None,
-            background_image=pil_to_base64(pil_image),  # ✅ send base64-encoded PNG
+            background_image=pil_image,  # ✅ pass PIL Image
             update_streamlit=True,
             height=orig_pil_image.height,
             width=orig_pil_image.width,
