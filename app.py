@@ -3,6 +3,8 @@ from PIL import Image
 import cv2
 import numpy as np
 from streamlit_drawable_canvas import st_canvas
+import base64
+from io import BytesIO
 
 RHS_COLORS = [
     {"name": "RHS 43A", "code": "43A", "rgb": (209, 39, 52), "hex": "#D12734"},
@@ -167,6 +169,12 @@ RHS_COLORS = [
 
 ]
 
+def pil_to_base64(img):
+    buf = BytesIO()
+    img.save(buf, format="PNG")
+    byte_im = buf.getvalue()
+    return "data:image/png;base64," + base64.b64encode(byte_im).decode()
+
 # Function for Light Correction 
 def correct_lighting(image): 
     lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
@@ -271,15 +279,17 @@ if images_uploaded is not None:
         st.subheader("Click on the Image") 
         # Display drawable canvas (Interactive) 
         canvas_res = st_canvas(
-            fill_color="green",  # translucent fill color
-            stroke_width=5,
-            background_image=pil_image,
+            fill_color="green",
+            stroke_width=2,
+            stroke_color="black",
+            background_color=None,
+            background_image=pil_to_base64(pil_image),  # ✅ send base64-encoded PNG
             update_streamlit=True,
-            height=800,
-            width=800,
+            height=orig_pil_image.height,
+            width=orig_pil_image.width,
             drawing_mode="point",
-            key="canvas",
-            background_color=None
+            point_display_radius=5,
+            key="canvas"
         )
 
     
