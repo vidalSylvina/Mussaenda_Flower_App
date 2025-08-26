@@ -273,7 +273,7 @@ if images_uploaded is not None:
         canvas_res = st_canvas(
             fill_color="green",  # translucent fill color
             stroke_width=5,
-            background_image=orig_pil_image,
+            background_image=pil_image,
             update_streamlit=True,
             height=800,
             width=800,
@@ -281,6 +281,7 @@ if images_uploaded is not None:
             key="canvas",
             background_color=None
         )
+
     
         # if user clicked on image 
         if canvas_res.json_data is not None and len(canvas_res.json_data["objects"]) > 0: 
